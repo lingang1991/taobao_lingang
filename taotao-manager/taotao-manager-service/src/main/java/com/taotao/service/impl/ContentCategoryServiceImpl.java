@@ -35,6 +35,7 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		for (TbContentCategory tbContentCategory : list) {
 			//创建一个节点
 			EUTreeNode node = new EUTreeNode();
+			node.setParentId(tbContentCategory.getParentId());
 			node.setId(tbContentCategory.getId());
 			node.setText(tbContentCategory.getName());
 			node.setState(tbContentCategory.getIsParent()?"closed":"open");
@@ -73,6 +74,48 @@ public class ContentCategoryServiceImpl implements ContentCategoryService {
 		return TaotaoResult.ok(contentCategory);
 
 		
+	}
+
+	@Override
+	public TaotaoResult deleteContentCategory(long parentId, long id) {
+		
+		//删除节点的子节点（如果有的话）。查询所有父节点为id数据、因为如果删除的是父节点，则子节点也要被删除
+	    TbContentCategoryExample example = new TbContentCategoryExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andParentIdEqualTo(id);
+		//执行查询
+		List<TbContentCategory> list = contentCategoryMapper.selectByExample(example);
+		if(list.size()>0){
+		for (TbContentCategory tbContentCategory : list) {
+		contentCategoryMapper.deleteByPrimaryKey(tbContentCategory.getId());
+		 }
+		}
+		//删除节点
+		contentCategoryMapper.deleteByPrimaryKey(id);
+		
+		//根据parentId查询节点列表
+	    TbContentCategoryExample example1 = new TbContentCategoryExample();
+		Criteria criteria1 = example1.createCriteria();
+		criteria1.andParentIdEqualTo(parentId);
+		//执行查询
+		List<TbContentCategory> list1 = contentCategoryMapper.selectByExample(example1);
+		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(parentId);
+		if(list1.size() <= 0) {
+			contentCategory.setIsParent(false);
+			//更新父节点
+			contentCategoryMapper.updateByPrimaryKey(contentCategory);
+		}
+		//返回结果
+		return TaotaoResult.ok(contentCategory);
+	}
+
+	@Override
+	public TaotaoResult updateContentCategory(long id, String name) {
+		TbContentCategory contentCategory = contentCategoryMapper.selectByPrimaryKey(id);
+		contentCategory.setName(name);
+		System.out.println(name+" 设置成功！");
+		contentCategoryMapper.updateByPrimaryKey(contentCategory);
+		return TaotaoResult.ok(contentCategory);
 	}
 
 }
