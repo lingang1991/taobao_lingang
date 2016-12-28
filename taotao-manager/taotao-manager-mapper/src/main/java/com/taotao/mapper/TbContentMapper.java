@@ -21,6 +21,8 @@ public interface TbContentMapper {
     List<TbContent> selectByExample(TbContentExample example);
 
     TbContent selectByPrimaryKey(Long id);
+    
+    List<TbContent> selectById(Long id);
 
     int updateByExampleSelective(@Param("record") TbContent record, @Param("example") TbContentExample example);
 
