@@ -67,12 +67,12 @@ public class HttpClientTest {
 	}
 	
 	
-	
+	@Test
 	public void doPost() throws Exception {
 	//创建一个httpclient对象
 	CloseableHttpClient httpClient = HttpClients.createDefault();
 	//创建一个post对象
-	HttpPost post = new HttpPost("http://localhost:8082/httpclient/post.html");
+	HttpPost post = new HttpPost("http://localhost:8082/httpclient/post.action");
 	//执行post请求
 	CloseableHttpResponse response = httpClient.execute(post);
 	String string = EntityUtils.toString(response.getEntity());
@@ -82,13 +82,13 @@ public class HttpClientTest {
 		
 	}
 	
-	
+	 
 	@Test
 	public void doPostWithParam() throws Exception{   
 		CloseableHttpClient httpClient = HttpClients.createDefault();
-		
+		    
 		//创建一个post对象
-		HttpPost post = new HttpPost("http://localhost:8082/httpclient/post.html");
+		HttpPost post = new HttpPost("http://localhost:8082/httpclient/post.action");
 		
 		//创建一个Entity。模拟一个表单
 		List<NameValuePair> kvList = new ArrayList<>();
