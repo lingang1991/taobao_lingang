@@ -34,7 +34,7 @@
 <div id="o-slide">
 <div class="slide" id="slide">
 <script type="text/javascript">
-;(function(cfg, doc) {
+(function(cfg, doc) {
     if ( !cfg.DATA_MSlide ) {
         cfg.DATA_MSlide=[];
     }

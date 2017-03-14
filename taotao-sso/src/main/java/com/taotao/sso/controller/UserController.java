@@ -1,5 +1,9 @@
 package com.taotao.sso.controller;
 
+/*发布登录，注册，安全退出的服务接口*/
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -83,10 +87,11 @@ public class UserController {
 		//用户登录
 		@RequestMapping(value="/login", method=RequestMethod.POST)
 		@ResponseBody
-		public TaotaoResult userLogin(String username, String password){
+		public TaotaoResult userLogin(String username, String password, HttpServletRequest request, 
+				HttpServletResponse response){
 			
 			try {
-				TaotaoResult result = userService.userLogin(username, password);
+				TaotaoResult result = userService.userLogin(username, password, request, response);
 				return result;
 			} catch (Exception e) {
 				e.printStackTrace();
