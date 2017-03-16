@@ -15,21 +15,21 @@ public class ItemController {
 	
 	@Autowired
 	private ItemService itemService;
-	
+	//商品的基本信息
 	@RequestMapping("/info/{itemId}")
 	@ResponseBody
 	public TaotaoResult getItemBaseInfo(@PathVariable Long itemId){
 		TaotaoResult result = itemService.getItemBaseInfo(itemId);
 		return result;
 	}
-	
+	//商品的分类
 	@RequestMapping("/desc/{itemId}")
 	@ResponseBody
 	public TaotaoResult  getItemDesc(@PathVariable Long itemId) {
 		TaotaoResult result = itemService.getItemDesc(itemId);
 		return result;
 	}
-	
+	//商品的规格参数
 	@RequestMapping("/param/{itemId}")
 	@ResponseBody
 	public TaotaoResult getItemParam(@PathVariable Long itemId) {

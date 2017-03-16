@@ -40,9 +40,11 @@ public final class CookieUtils {
             return null;
         }
         String retValue = null;
+        //获取所有的cookie，并遍历取出请求的cookie值
         try {
             for (int i = 0; i < cookieList.length; i++) {
                 if (cookieList[i].getName().equals(cookieName)) {
+                	//如果是编码的则按照utf-8编码输出
                     if (isDecoder) {
                         retValue = URLDecoder.decode(cookieList[i].getValue(), "UTF-8");
                     } else {
@@ -184,8 +186,11 @@ public final class CookieUtils {
                 	cookie.setDomain(domainName);
                 }
             }
+            //如果设置为“/sessionWeb/”，则只有contextPath为“/sessionWeb”的程序可以访问该Cookie。如果设置为“/”，则本域名下contextPath都可以访问该Cookie。注意最后一个字符必须为“/”
             cookie.setPath("/");
+            //通过response.addCookie(Cookie)向客户端设置Cookie。
             response.addCookie(cookie);
+            //要想修改Cookie只能使用一个同名的Cookie来覆盖原来的Cookie，达到修改的目的
         } catch (Exception e) {
         	 e.printStackTrace();
         }
