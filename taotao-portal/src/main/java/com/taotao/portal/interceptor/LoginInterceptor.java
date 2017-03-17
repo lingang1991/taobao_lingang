@@ -32,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 		if (null==user) {
 			//则需要跳转到登录页面，把用户请求的url传递给登录页面
 			response.sendRedirect(userService.SSO_BASE_URL + userService.SSO_PAGE_LOGIN +
-					 "?redirect=" +request.getRequestURI());
+					 "?redirect=" +"http://localhost:8082"+ request.getRequestURI());
 			//返回false
 			return false;	
 		}

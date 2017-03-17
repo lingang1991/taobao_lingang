@@ -98,5 +98,15 @@ public class CartServiceImpl implements CartService {
 		return new ArrayList<>();
 	}
 
+	/**
+	 * 展示购物车商品的业务层，从cookie中取购物车商品信息
+	 * */
+	@Override
+	public List<CartItem> getCartItemList(HttpServletRequest request,
+			HttpServletResponse response) {
+		List<CartItem> itemList = getCartItemList(request);
+		return itemList;
+	}
+
 
 }
