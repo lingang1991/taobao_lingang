@@ -12,4 +12,5 @@ public interface CartService {
 	
 	TaotaoResult addCartItem(long itemId, int num, HttpServletRequest request, HttpServletResponse response);
     List<CartItem> getCartItemList(HttpServletRequest request, HttpServletResponse response);
+    public TaotaoResult deleteCartItem(long itemId, HttpServletRequest request, HttpServletResponse response);
 }

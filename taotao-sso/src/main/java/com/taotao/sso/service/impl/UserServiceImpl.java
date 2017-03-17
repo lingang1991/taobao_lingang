@@ -74,6 +74,8 @@ public class UserServiceImpl implements UserService {
 		user.setUpdated(new Date());
 		//使用spring框架提供的md5加密
 		user.setPassword(DigestUtils.md5DigestAsHex(user.getPassword().getBytes()));
+		//调用发送邮件服务
+        
 		userMapper.insert(user);
 		return TaotaoResult.ok();
 	}
