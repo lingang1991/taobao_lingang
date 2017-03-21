@@ -114,9 +114,10 @@ public class CartServiceImpl implements CartService {
 		//从cookie中取购物车商品列表
 		List<CartItem> itemList = getCartItemList(request);
 		//从列表中找到此商品
-		for (CartItem cartItem : itemList) {
-			if (cartItem.getId() == itemId) {
-				itemList.remove(cartItem);
+		for (CartItem carItem : itemList) {
+			if (carItem.getId() == itemId) {
+				itemList.remove(carItem);
+				break;
 			}
 		}
 		//把购物车列表重新写入cookie
